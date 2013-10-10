@@ -5,6 +5,7 @@ gem 'activeadmin'
 gem 'pg'
 gem 'rails'
 gem 'omniauth'
+gem 'rails_12factor'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
