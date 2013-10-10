@@ -5,7 +5,6 @@ Onesemble::Application.routes.draw do
     get "login", :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy"
     get "signup", :to => "devise/registrations#new"
+    root :to => 'devise/sessions#new'
   end
-
-  root :to => 'posts#index'
 end
