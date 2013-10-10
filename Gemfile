@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'activeadmin'
 gem 'pg'
-gem 'rails', '3.2.13'
+gem 'rails'
+gem 'omniauth'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
