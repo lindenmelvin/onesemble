@@ -1,1 +1,12 @@
-<h1>HELLO!</h1>
+<%= link_to "My Profile", user_path(current_user) %>
+<%= link_to "New Post", new_post_path %>
+<%= link_to "Posts", posts_path %>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <div>Posted at: <%= post.created_at.strftime("%A %B %d %Y at %I:%M %p") %></div>
+    <div>Post by: <%= post.user.email %></div>
+    <div>Subject: <%= post.subject %></div>
+    <div>Body: <%= post.body %></div>
+  </div>
+<% end %>

@@ -1,7 +1,5 @@
 Onesemble::Application.routes.draw do
   
-  resources :posts
-  
   devise_for :users
   
   devise_scope :user do
@@ -10,4 +8,7 @@ Onesemble::Application.routes.draw do
     get "signup", :to => "devise/registrations#new"
     root :to => 'devise/sessions#new'
   end
+  
+  resources :posts
+  resources :users
 end

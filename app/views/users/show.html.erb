@@ -1,0 +1,13 @@
+<%= link_to "Edit Profile", edit_user_path(current_user) %>
+<%= link_to "New Post", new_post_path %>
+<%= link_to "Posts", posts_path %>
+
+<% if current_user.first_name.present? %>
+  <h1><%= current_user.first_name %>'s Profile</h1>
+<% else %>
+  <h1><%= current_user.email %>'s Profile</h1>
+<% end %>
+
+<div>First Name: <%= current_user.first_name %></div>
+<div>Last Name: <%= current_user.last_name %></div>
+<div>Email: <%= current_user.email %></div>
