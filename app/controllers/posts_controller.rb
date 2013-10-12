@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    @users = User.all
   end
   
   def new
@@ -14,5 +15,14 @@ class PostsController < ApplicationController
       flash[:error] = "Error Creating Post"
       render :action => :new
     end
+  end
+  
+  def search
+    @posts = []
+    if params[:users]
+      @posts = Post.where("user_id in (#{params[:users].join(',')})")
+    end
+    @users = User.all
+    render action: :index
   end
 end

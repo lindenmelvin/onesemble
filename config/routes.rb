@@ -9,6 +9,9 @@ Onesemble::Application.routes.draw do
     root :to => 'devise/sessions#new'
   end
   
-  resources :posts
+  resources :posts do
+    post :search, :on => :collection
+  end
+  
   resources :users
 end

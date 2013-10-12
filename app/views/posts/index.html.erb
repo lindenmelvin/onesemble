@@ -2,6 +2,18 @@
 <%= link_to "New Post", new_post_path %>
 <%= link_to "Posts", posts_path %>
 
+<%= form_tag("/posts/search", method: "post") do %>
+  <!-- <%= label_tag(:email, "Search for:") %> -->
+  <!-- <%= text_field_tag(:email) %> -->
+  <% @users.each do |user| %>
+    <label>
+      <input name="users[]" type="checkbox" value="<%= user.id %>">
+      <%= user.email %>
+    </label>
+  <% end %>
+  <%= submit_tag("Search Posts") %>
+<% end %>
+
 <% @posts.each do |post| %>
   <div class="post">
     <div>Posted at: <%= post.created_at.strftime("%A %B %d %Y at %I:%M %p") %></div>
