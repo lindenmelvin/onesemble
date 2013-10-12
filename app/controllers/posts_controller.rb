@@ -18,10 +18,7 @@ class PostsController < ApplicationController
   end
   
   def search
-    @posts = []
-    if params[:users]
-      @posts = Post.where("user_id in (#{params[:users].join(',')})")
-    end
+    @posts = Post.where("user_id in (#{params[:users].join(',')})") rescue []
     @users = User.all
     render action: :index
   end
