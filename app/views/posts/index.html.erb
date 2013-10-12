@@ -5,16 +5,16 @@
 <div id="search-container">
   <h3>Search Posts</h3>
   <%= form_tag("/posts/search", method: "post") do %>
-    <!-- <%= label_tag(:email, "Search for:") %> -->
-    <!-- <%= text_field_tag(:email) %> -->
-    Published by:
+    <div>Published by:</div>
     <% @users.each do |user| %>
       <label>
         <input name="users[]" type="checkbox" value="<%= user.id %>">
         <%= user.email %>
       </label>
     <% end %>
-    <%= submit_tag("Search Posts") %>
+    <div>
+      <%= submit_tag("Search Posts") %>
+    </div>
   <% end %>
 </div>
 
