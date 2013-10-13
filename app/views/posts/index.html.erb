@@ -52,6 +52,7 @@
       <div>Instruments: <%= post.instruments.collect { |instrument| instrument.name }.join(', ') %></div>
       <div>Genres: <%= post.genres.collect { |genre| genre.name }.join(', ') %></div>
       <div>Specialties: <%= post.specialties.collect { |specialty| specialty.name }.join(', ') %></div>
+      <a href="<%= edit_post_path(post) %>">Edit Post</a>
     </div>
   <% end %>
 </div>

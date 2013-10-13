@@ -27,6 +27,30 @@ class PostsController < ApplicationController
     end
   end
   
+  def edit
+    @post = Post.find(params[:id])
+    @genres = Genre.all
+    @instruments = Instrument.all
+    @specialties = Specialty.all
+  end
+  
+  def update
+    @post = Post.find(params[:id])
+    @post.update_attributes(params[:post])
+    @post.genres.destroy_all
+    @post.instruments.destroy_all
+    @post.specialties.destroy_all
+    params[:genre_ids].each { |genre_id| @post.genres << Genre.find(genre_id)} if params[:genre_ids]
+    params[:instrument_ids].each { |instrument_id| @post.instruments << Instrument.find(instrument_id)} if params[:instrument_ids]
+    params[:specialty_ids].each { |specialty_id| @post.specialties << Specialty.find(specialty_id)} if params[:instrument_ids]
+    if @post.save
+      redirect_to posts_path
+    else
+      flash[:error] = "Error Creating Post"
+      render :action => :new
+    end
+  end
+  
   def search
     statement = create_sql_statement
     @posts = Post.joins(:instruments, :genres, :specialties).where(statement).uniq
@@ -38,7 +62,8 @@ class PostsController < ApplicationController
         post.body, 
         post.instruments.collect { |instrument| instrument.name }.join(', '), 
         post.genres.collect { |genre| genre.name }.join(', '), 
-        post.specialties.collect { |specialty| specialty.name }.join(', ')
+        post.specialties.collect { |specialty| specialty.name }.join(', '),
+        edit_post_path(post)
       ]
     end
     @users = User.all

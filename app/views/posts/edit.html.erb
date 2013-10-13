@@ -1,0 +1,39 @@
+<%= link_to "My Profile", user_path(current_user) %>
+<%= link_to "New Post", new_post_path %>
+<%= link_to "Posts", posts_path %>
+
+<%= form_for @post do |f| %>
+  <div><%= f.label :subject %><br />
+  <%= f.text_field :subject %></div>
+
+  <div><%= f.label :body %><br />
+  <%= f.text_area :body %></div>
+  
+  <div>
+    <div>Pick an Instrument</div>
+    <% @instruments.each do |instrument| %>
+      <input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>" "<% if @post.instruments.map(&:id).include?(instrument.id) %>" checked=checked "<% end %>/>
+      <label for="instrument-<%= instrument.name %>"><%= instrument.name %></label>
+    <% end %>
+  </div>
+  
+  <div>
+    <div>Pick a Genre</div>
+    <% @genres.each do |genre| %>
+      <input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>" "<% if @post.genres.map(&:id).include?(genre.id) %>" checked=checked "<% end %>"/>
+      <label for="genre-<%= genre.name %>"><%= genre.name %></label>
+    <% end %>
+  </div>
+  
+  <div>Specialty</div>
+  <% @specialties.each do |specialty| %>
+    <label>
+      <input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>" "<% if @post.specialties.map(&:id).include?(specialty.id) %>" checked=checked "<% end %>">
+      <%= specialty.name %>
+    </label>
+  <% end %>
+  
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  
+  <div><%= f.submit "Create Post" %></div>
+<% end %>
