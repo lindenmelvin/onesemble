@@ -4,7 +4,7 @@
 
 <div id="search-container">
   <h3>Search Posts</h3>
-  <%= form_tag("/posts/search", method: "post") do %>
+  <%= form_tag("/posts/search.json", method: "post", remote: true, id: 'post-search-form') do %>
     <div>Published by:</div>
     <% @users.each do |user| %>
       <label>
@@ -18,11 +18,13 @@
   <% end %>
 </div>
 
-<% @posts.each do |post| %>
-  <div class="post">
-    <div>Posted at: <%= post.created_at.strftime("%A %B %d %Y at %I:%M %p") %></div>
-    <div>Post by: <%= post.user.email %></div>
-    <div>Subject: <%= post.subject %></div>
-    <div>Body: <%= post.body %></div>
-  </div>
-<% end %>
+<div id="posts-container">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <div>Posted at: <%= post.created_at.strftime("%A %B %d %Y at %I:%M %p") %></div>
+      <div>Post by: <%= post.user.email %></div>
+      <div>Subject: <%= post.subject %></div>
+      <div>Body: <%= post.body %></div>
+    </div>
+  <% end %>
+</div>

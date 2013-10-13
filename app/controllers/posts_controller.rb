@@ -18,8 +18,9 @@ class PostsController < ApplicationController
   end
   
   def search
-    @posts = Post.where("user_id in (#{params[:users].join(',')})") rescue []
+    @posts = Post.includes(:user).where("user_id in (#{params[:users].join(',')})") rescue []
+    return_hash = @posts.collect { |post| [post.created_at.strftime("%A %B %d %Y at %I:%M %p"), post.user.email, post.subject, post.body]}
     @users = User.all
-    render action: :index
+    render json: { posts: return_hash }
   end
 end
