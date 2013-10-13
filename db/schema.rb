@@ -11,14 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011014116) do
+ActiveRecord::Schema.define(:version => 20131013183653) do
+
+  create_table "genres", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "instruments", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "subject"
     t.string   "body"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "instrument_id"
+    t.integer  "genre_id"
+  end
+
+  create_table "specialties", :force => true do |t|
+    t.string "name"
   end
 
   create_table "users", :force => true do |t|

@@ -6,6 +6,8 @@ class PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @genres = Genre.all
+    @instruments = Instrument.all
   end
   
   def create    
