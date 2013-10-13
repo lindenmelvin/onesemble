@@ -7,6 +7,9 @@ $(document).on 'ajax:success', (xhr, data, status) ->
         <div>Post by: #{post[1]} </div>
         <div>Subject: #{post[2]} </div>
         <div>Body: #{post[3]} </div>
+        <div>Instruments: #{post[4]} </div>
+        <div>Genres: #{post[5]} </div>
+        <div>Specialties: #{post[6]} </div>
       </div>
     ")
     

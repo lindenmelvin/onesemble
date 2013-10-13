@@ -13,7 +13,31 @@
       </label>
     <% end %>
     <div>
-      <%= submit_tag("Search Posts") %>
+    <div>Instrument</div>
+    <% @instruments.each do |instrument| %>
+      <label>
+        <input name="instruments[]" type="checkbox" value="<%= instrument.id %>">
+        <%= instrument.name %>
+      </label>
+    <% end %>
+    <div>
+    <div>Genre</div>
+    <% @genres.each do |genre| %>
+      <label>
+        <input name="genres[]" type="checkbox" value="<%= genre.id %>">
+        <%= genre.name %>
+      </label>
+    <% end %>
+    
+    <div>Specialty</div>
+    <% @specialties.each do |specialty| %>
+      <label>
+        <input name="specialties[]" type="checkbox" value="<%= specialty.id %>">
+        <%= specialty.name %>
+      </label>
+    <% end %>
+    <div>
+    <%= submit_tag("Search Posts") %>
     </div>
   <% end %>
 </div>
@@ -25,8 +49,9 @@
       <div>Post by: <%= post.user.email %></div>
       <div>Subject: <%= post.subject %></div>
       <div>Body: <%= post.body %></div>
-      <div>Instrument: <%= post.instrument.name %></div>
-      <div>Genre: <%= post.genre.name %></div>
+      <div>Instruments: <%= post.instruments.collect { |instrument| instrument.name }.join(', ') %></div>
+      <div>Genres: <%= post.genres.collect { |genre| genre.name }.join(', ') %></div>
+      <div>Specialties: <%= post.specialties.collect { |specialty| specialty.name }.join(', ') %></div>
     </div>
   <% end %>
 </div>

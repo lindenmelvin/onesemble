@@ -12,7 +12,7 @@
   <div>
     <div>Pick an Instrument</div>
     <% @instruments.each do |instrument| %>
-      <input type="radio" id="instrument-<%= instrument.name %>" name="post[instrument_id]" value="<%= instrument.id %>"/>
+      <input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>"/>
       <label for="instrument-<%= instrument.name %>"><%= instrument.name %></label>
     <% end %>
   </div>
@@ -20,10 +20,18 @@
   <div>
     <div>Pick a Genre</div>
     <% @genres.each do |genre| %>
-      <input type="radio" id="genre-<%= genre.name %>" name="post[genre_id]" value="<%= genre.id %>"/>
+      <input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>"/>
       <label for="genre-<%= genre.name %>"><%= genre.name %></label>
     <% end %>
   </div>
+  
+  <div>Specialty</div>
+  <% @specialties.each do |specialty| %>
+    <label>
+      <input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>">
+      <%= specialty.name %>
+    </label>
+  <% end %>
   
   <%= f.hidden_field :user_id, :value => current_user.id %>
   
