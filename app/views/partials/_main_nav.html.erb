@@ -1,0 +1,10 @@
+<% if current_user %>
+  <%= link_to "My Profile", user_path(current_user) %>
+  <%= link_to "Edit Profile", edit_user_path(current_user) %>
+  <%= link_to "New Post", new_post_path %>
+  <%= link_to "Posts", posts_path %>
+  <%= link_to "Logout", '/logout' %>
+<% else %>
+  <%= link_to "Login", '/login' %>
+  <%= link_to "Signup", '/signup' %>
+<% end %>

@@ -10,6 +10,9 @@ $(document).on 'ajax:success', (xhr, data, status) ->
         <div>Instruments: #{post[4]} </div>
         <div>Genres: #{post[5]} </div>
         <div>Specialties: #{post[6]} </div>
+        <a href='#{post[7]}'>Edit Post</a>
+        <a href='#{post[8]}'>View Post</a>
+        <a href='#{post[9]}' data-confirm='Are you sure?' data-method='delete' rel='nofollow'>Destroy</a>
       </div>
     ")
     

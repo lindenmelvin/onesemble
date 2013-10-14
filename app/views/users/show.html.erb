@@ -1,7 +1,3 @@
-<%= link_to "Edit Profile", edit_user_path(current_user) %>
-<%= link_to "New Post", new_post_path %>
-<%= link_to "Posts", posts_path %>
-
 <% if current_user.first_name.present? %>
   <h1><%= current_user.first_name %>'s Profile</h1>
 <% else %>
@@ -11,3 +7,12 @@
 <div>First Name: <%= current_user.first_name %></div>
 <div>Last Name: <%= current_user.last_name %></div>
 <div>Email: <%= current_user.email %></div>
+
+<h1>Your Posts</h1>
+
+<% @posts.each do |post| %>
+  <%= render 'posts/post', post: post %>
+  <a href="<%= post_path(post) %>">View Post</a>
+  <a href="<%= edit_post_path(post) %>">Edit Post</a>
+  <a href="<%= post_path(post) %>" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a>
+<% end %>

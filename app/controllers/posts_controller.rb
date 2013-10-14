@@ -1,24 +1,21 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-    @users = User.all
-    @genres = Genre.all
-    @instruments = Instrument.all
-    @specialties = Specialty.all
+  end
+  
+  def show
+    @post = Post.find(params[:id])
   end
   
   def new
     @post = Post.new
-    @genres = Genre.all
-    @instruments = Instrument.all
-    @specialties = Specialty.all
   end
   
   def create
     @post = Post.create(params[:post])
     params[:genre_ids].each { |genre_id| @post.genres << Genre.find(genre_id)} if params[:genre_ids]
     params[:instrument_ids].each { |instrument_id| @post.instruments << Instrument.find(instrument_id)} if params[:instrument_ids]
-    params[:specialty_ids].each { |specialty_id| @post.specialties << Specialty.find(specialty_id)} if params[:instrument_ids]
+    params[:specialty_ids].each { |specialty_id| @post.specialties << Specialty.find(specialty_id)} if params[:specialty_ids]
     if @post.save
       redirect_to posts_path
     else
@@ -29,9 +26,6 @@ class PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
-    @genres = Genre.all
-    @instruments = Instrument.all
-    @specialties = Specialty.all
   end
   
   def update
@@ -42,12 +36,23 @@ class PostsController < ApplicationController
     @post.specialties.destroy_all
     params[:genre_ids].each { |genre_id| @post.genres << Genre.find(genre_id)} if params[:genre_ids]
     params[:instrument_ids].each { |instrument_id| @post.instruments << Instrument.find(instrument_id)} if params[:instrument_ids]
-    params[:specialty_ids].each { |specialty_id| @post.specialties << Specialty.find(specialty_id)} if params[:instrument_ids]
+    params[:specialty_ids].each { |specialty_id| @post.specialties << Specialty.find(specialty_id)} if params[:specialty_ids]
     if @post.save
       redirect_to posts_path
     else
       flash[:error] = "Error Creating Post"
       render :action => :new
+    end
+  end
+  
+  def destroy
+    @post = Post.find(params[:id])
+    
+    if @post.destroy
+      redirect_to posts_path
+    else
+      flash[:errors] = 'Unable to delete post'
+      render action: :index
     end
   end
   
@@ -63,7 +68,9 @@ class PostsController < ApplicationController
         post.instruments.collect { |instrument| instrument.name }.join(', '), 
         post.genres.collect { |genre| genre.name }.join(', '), 
         post.specialties.collect { |specialty| specialty.name }.join(', '),
-        edit_post_path(post)
+        edit_post_path(post),
+        post_path(post),
+        post_path(post),
       ]
     end
     @users = User.all

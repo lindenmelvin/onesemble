@@ -1,0 +1,9 @@
+<div class="post">
+  <div>Posted at: <%= post.created_at.strftime("%A %B %d %Y at %I:%M %p") %></div>
+  <div>Post by: <%= post.user.email %></div>
+  <div>Subject: <%= post.subject %></div>
+  <div>Body: <%= post.body %></div>
+  <div>Instruments: <%= post.instruments.collect { |instrument| instrument.name }.join(', ') %></div>
+  <div>Genres: <%= post.genres.collect { |genre| genre.name }.join(', ') %></div>
+  <div>Specialties: <%= post.specialties.collect { |specialty| specialty.name }.join(', ') %></div>
+</div>

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Onesemble</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -10,12 +10,7 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-  <% if current_user %>
-    <a href='/logout'>Logout</a>
-  <% else %>
-    <a href='/login'>Login</a>
-    <a href='/signup'>Signup</a>
-  <% end %>
+  <%= render 'partials/main_nav'%>
   
   <%= yield %>
 
