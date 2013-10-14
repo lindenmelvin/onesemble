@@ -1,0 +1,75 @@
+<div><%= f.label :subject %><br />
+<%= f.text_field :subject %></div>
+
+<div><%= f.label :body %><br />
+<%= f.text_area :body %></div>
+
+<div>
+	<div>State</div>
+	<% State.all.each do |state| %>
+		<label>
+			<% if post.state %>
+				<input name="post[state_id]" type="radio" value="<%= state.id %>" "<% if post.state.id == state.id %>" checked=checked "<% end %>">
+			<% else %>
+				<input name="post[state_id]" type="radio" value="<%= state.id %>">
+			<% end %>
+			<%= state.name %>
+		</label>
+	<% end %>
+</div>
+
+<div>
+	<div>City</div>
+	<% City.all.each do |city| %>
+		<label>
+			<% if post.city %>
+				<input name="post[city_id]" type="radio" value="<%= city.id %>" "<% if post.city.id == city.id %>" checked=checked "<% end %>">
+			<% else %>
+				<input name="post[city_id]" type="radio" value="<%= city.id %>">
+			<% end %>
+			<%= city.name %>
+		</label>
+	<% end %>
+</div>
+
+<div>
+  <div>Pick an Instrument</div>
+  <% Instrument.all.each do |instrument| %>
+		<label>
+			<% if post.instruments %>
+	    	<input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>" "<% if post.instruments.map(&:id).include?(instrument.id) %>" checked=checked "<% end %>"/>
+			<% else %>
+				<input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>">
+			<% end %>
+	    <%= instrument.name %>
+		</label>
+  <% end %>
+</div>
+
+<div>
+  <div>Pick a Genre</div>
+  <% Genre.all.each do |genre| %>
+		<label>
+			<% if post.genres %>
+	    	<input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>" "<% if post.genres.map(&:id).include?(genre.id) %>" checked=checked "<% end %>"/>
+			<% else %>
+				<input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>">
+			<% end %>
+	    <%= genre.name %>
+		</label>
+  <% end %>
+</div>
+
+<div>Specialty</div>
+<% Specialty.all.each do |specialty| %>
+  <label>
+		<% if post.specialties %>
+    	<input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>" "<% if post.specialties.map(&:id).include?(specialty.id) %>" checked=checked "<% end %>">
+		<% else %>
+			<input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>">
+		<% end %>
+    <%= specialty.name %>
+  </label>
+<% end %>
+
+<%= f.hidden_field :user_id, :value => current_user.id %>
