@@ -6,6 +6,7 @@ gem 'pg'
 gem 'rails'
 gem 'omniauth'
 gem 'rails_12factor'
+gem 'ancestry'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'

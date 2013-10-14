@@ -13,5 +13,6 @@ Onesemble::Application.routes.draw do
     post :search, :on => :collection
   end
   
+  resources :messages
   resources :users
 end

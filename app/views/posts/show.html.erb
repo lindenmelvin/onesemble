@@ -1,1 +1,2 @@
 <%= render 'post', post: @post %>
+<%= link_to 'Message', new_message_path(:receiver_id => @post.user.id )%>

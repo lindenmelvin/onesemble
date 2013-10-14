@@ -1,0 +1,13 @@
+<h1>Inbox</h1>
+
+<% if @messages %>
+  <% @messages.each do |message| %>
+    <div class="message">
+      <div>From: <%= User.find(message.sender_id).email %>
+      <div>Body: <%= message.body %>
+    </div>
+    <%= link_to 'Reply', message_path(message)%>
+  <% end %>
+<% else %>
+  <div>You have no messages</div>
+<% end %>

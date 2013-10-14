@@ -1,0 +1,11 @@
+<div class="message">
+  <%= User.find(@message.sender_id).email %> says: <%= @message.body %>
+</div>
+
+<% @message.children.arrange(:order => :created_at).each do |message| %>
+  <div class="message">
+    <%= User.find(message[0].sender_id).email %> says: <%= message[0].body %>
+  </div>
+<% end %>
+
+<%= link_to 'Reply', new_message_path(:parent_id => @message, :receiver_id => @message.sender_id) %>
