@@ -3,7 +3,7 @@
 namespace :states_and_cities do
   task :create => :environment do
 
-    puts "===== Creating Specialties ====="
+    puts "===== Creating Cities and States ====="
     State.destroy_all
     ActiveRecord::Base.connection.execute("truncate table states restart identity")
     City.destroy_all
