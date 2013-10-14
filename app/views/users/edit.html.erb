@@ -12,7 +12,11 @@
 		<div>State</div>
 		<% State.all.each do |state| %>
 			<label>
-				<input name="user[state_id]" type="radio" value="<%= state.id %>" "<% if current_user.state.id == state.id %>" checked=checked "<% end %>">
+				<% if current_user.state %>
+					<input name="user[state_id]" type="radio" value="<%= state.id %>" "<% if current_user.state.id == state.id %>" checked=checked "<% end %>">
+				<% else %>
+					<input name="user[state_id]" type="radio" value="<%= state.id %>">
+				<% end %>
 				<%= state.name %>
 			</label>
 		<% end %>
@@ -22,7 +26,11 @@
 		<div>City</div>
 		<% City.all.each do |city| %>
 			<label>
-				<input name="user[city_id]" type="radio" value="<%= city.id %>" "<% if current_user.city.id == city.id %>" checked=checked "<% end %>">
+				<% if current_user.city %>
+					<input name="user[city_id]" type="radio" value="<%= city.id %>" "<% if current_user.city.id == city.id %>" checked=checked "<% end %>">
+				<% else %>
+						<input name="user[city_id]" type="radio" value="<%= city.id %>">
+				<% end %>
 				<%= city.name %>
 			</label>
 		<% end %>
