@@ -5,6 +5,26 @@
   <div><%= f.label :body %><br />
   <%= f.text_area :body %></div>
   
+	<div>
+		<div>State</div>
+		<% State.all.each do |state| %>
+			<label>
+				<input name="post[state_id]" type="radio" value="<%= state.id %>" "<% if @post.state.id == state.id %>" checked=checked "<% end %>">
+				<%= state.name %>
+			</label>
+		<% end %>
+	</div>
+	
+	<div>
+		<div>City</div>
+		<% City.all.each do |city| %>
+			<label>
+				<input name="post[city_id]" type="radio" value="<%= city.id %>" "<% if @post.city.id == city.id %>" checked=checked "<% end %>">
+				<%= city.name %>
+			</label>
+		<% end %>
+	</div>
+	
   <div>
     <div>Pick an Instrument</div>
     <% Instrument.all.each do |instrument| %>

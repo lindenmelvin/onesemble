@@ -6,4 +6,5 @@
   <div>Instruments: <%= post.instruments.collect { |instrument| instrument.name }.join(', ') %></div>
   <div>Genres: <%= post.genres.collect { |genre| genre.name }.join(', ') %></div>
   <div>Specialties: <%= post.specialties.collect { |specialty| specialty.name }.join(', ') %></div>
+  <div>Location: <%= post.city.name %>, <%= post.state.name %></div>
 </div>

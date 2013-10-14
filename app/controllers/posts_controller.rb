@@ -68,8 +68,8 @@ class PostsController < ApplicationController
         post.instruments.collect { |instrument| instrument.name }.join(', '), 
         post.genres.collect { |genre| genre.name }.join(', '), 
         post.specialties.collect { |specialty| specialty.name }.join(', '),
-        edit_post_path(post),
-        post_path(post),
+        post.city.name,
+        post.state.name,
         post_path(post),
       ]
     end
@@ -86,6 +86,8 @@ class PostsController < ApplicationController
     statement[:instruments] = "instruments_posts.instrument_id in (#{params[:instruments].join(',')})" if params[:instruments]
     statement[:genres] = "genres_posts.genre_id in (#{params[:genres].join(',')})" if params[:genres]
     statement[:specialties] = "specialties_posts.specialty_id in (#{params[:specialties].join(',')})" if params[:specialties]
+    statement[:city] = "posts.city_id = #{params[:city_id]}" if params[:city_id]
+    statement[:state] = "posts.state_id = #{params[:state_id]}" if params[:state_id]
     
     ret = statement.values.compact.join(' and ')
     

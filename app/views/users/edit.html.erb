@@ -8,5 +8,24 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
+	<div>
+		<div>State</div>
+		<% State.all.each do |state| %>
+			<label>
+				<input name="user[state_id]" type="radio" value="<%= state.id %>" "<% if current_user.state.id == state.id %>" checked=checked "<% end %>">
+				<%= state.name %>
+			</label>
+		<% end %>
+	</div>
+	
+	<div>
+		<div>City</div>
+		<% City.all.each do |city| %>
+			<label>
+				<input name="user[city_id]" type="radio" value="<%= city.id %>" "<% if current_user.city.id == city.id %>" checked=checked "<% end %>">
+				<%= city.name %>
+			</label>
+		<% end %>
+	</div>
   <div><%= f.submit "Update Profile" %></div>
 <% end %>
