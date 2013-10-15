@@ -1,7 +1,22 @@
 <div id="search-container">
   <h3>Search Posts</h3>
   <%= form_tag("/posts/search.json", method: "post", remote: true, id: 'post-search-form') do %>
+  
+    <div>Type</div>
+    <div>
+      <label>
+        <input name="type" type="radio" value="WorkWantedPost">
+        Find Musicians
+      </label>
+      
+      <label>
+        <input name="type" type="radio" value="HelpWantedPost">
+        Find Opportunities
+      </label>
+    </div>
+    
     <div>Published by:</div>
+    <div>
     <% User.all.each do |user| %>
       <label>
         <input name="users[]" type="checkbox" value="<%= user.id %>">
@@ -9,7 +24,9 @@
       </label>
     <% end %>
     <div>
+      
     <div>Instrument</div>
+    <div>
     <% Instrument.all.each do |instrument| %>
       <label>
         <input name="instruments[]" type="checkbox" value="<%= instrument.id %>">
@@ -17,7 +34,9 @@
       </label>
     <% end %>
     <div>
+      
     <div>Genre</div>
+    <div>
     <% Genre.all.each do |genre| %>
       <label>
         <input name="genres[]" type="checkbox" value="<%= genre.id %>">
@@ -26,12 +45,27 @@
     <% end %>
     
     <div>Specialty</div>
+    <div>
     <% Specialty.all.each do |specialty| %>
       <label>
         <input name="specialties[]" type="checkbox" value="<%= specialty.id %>">
         <%= specialty.name %>
       </label>
     <% end %>
+    <div>
+      
+    <div>Rate</div>
+    <div>
+      <label>
+        Minimum Rate
+        <input name="rate[minimum]" type="text_field">
+      </label>
+      
+      <label>
+        Maximum Rate
+        <input name="rate[maximum]" type="text_field">
+      </label>
+    </div>
     <div>
     <%= submit_tag("Search Posts") %>
     </div>

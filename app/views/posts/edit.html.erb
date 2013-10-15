@@ -1,9 +1,20 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, url: post_path(@post) do |f| %>
   <div><%= f.label :subject %><br />
   <%= f.text_field :subject %></div>
 
   <div><%= f.label :body %><br />
   <%= f.text_area :body %></div>
+  
+  <div>
+    <label>
+      <input type="radio" name="post[type]" value="WorkWantedPost" "<% if @post.type == 'WorkWantedPost' %>" checked=checked "<% end %>" />
+      I am looking for work.
+    </label>
+    <label>
+      <input type="radio" name="post[type]" value="HelpWantedPost" "<% if @post.type == 'HelpWantedPost' %>" checked=checked "<% end %>"/>
+      I am looking for musicians.
+    </label>
+  </div>
   
   <div>
     <div>Pick an Instrument</div>
@@ -28,6 +39,9 @@
       <%= specialty.name %>
     </label>
   <% end %>
+  
+  <div><%= f.label :rate %><br />
+  $<%= f.text_field :rate %></div>
   
   <%= f.hidden_field :user_id, :value => current_user.id %>
   

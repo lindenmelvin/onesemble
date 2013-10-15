@@ -2,11 +2,13 @@
 
 <% if @messages %>
   <% @messages.each do |message| %>
+    <% next unless message.root? %>
     <div class="message">
-      <div>From: <%= User.find(message.sender_id).email %>
-      <div>Body: <%= message.body %>
+      <% if @unread_messages.include?(message) %><div>(unread)</div><% end %>
+      <div>From: <%= User.find(message.sender_id).email %></div>
+      <div>Body: <%= message.body %></div>
+      <%= link_to "View Thread", message_path(message) %>
     </div>
-    <%= link_to 'Reply', message_path(message)%>
   <% end %>
 <% else %>
   <div>You have no messages</div>

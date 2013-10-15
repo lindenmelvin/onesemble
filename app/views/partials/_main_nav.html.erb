@@ -3,7 +3,8 @@
   <%= link_to "Edit Profile", edit_user_path(current_user) %>
   <%= link_to "New Post", new_post_path %>
   <%= link_to "Posts", posts_path %>
-  <%= link_to "Messages", messages_path %>
+  <% unread_messages =  Message.where(receiver_id: current_user.id, read: false) %>
+  <a href="<%= messages_path %>"> Messages<% if unread_messages.present? %>(<%= unread_messages.count %>)<% end %></a>
   <%= link_to "Logout", '/logout' %>
 <% else %>
   <%= link_to "Login", '/login' %>

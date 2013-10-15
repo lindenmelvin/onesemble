@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014041909) do
+ActiveRecord::Schema.define(:version => 20131015140622) do
 
   create_table "genres", :force => true do |t|
     t.string "name"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20131014041909) do
     t.integer  "receiver_id"
     t.text     "body"
     t.string   "ancestry"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "read",        :default => false
   end
 
   add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"
@@ -48,6 +49,9 @@ ActiveRecord::Schema.define(:version => 20131014041909) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "type"
+    t.decimal  "rate"
+    t.boolean  "hourly"
   end
 
   create_table "specialties", :force => true do |t|

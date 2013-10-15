@@ -8,6 +8,6 @@ class Post < ActiveRecord::Base
   has_many :specialties_posts, :dependent => :destroy
   has_many :specialties, :through => :specialties_posts
   
-  attr_accessible :subject, :body, :user_id
+  attr_accessible :subject, :body, :user_id, :rate, :hourly, :type
   
 end

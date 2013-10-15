@@ -71,6 +71,9 @@ class PostsController < ApplicationController
         edit_post_path(post),
         post_path(post),
         post_path(post),
+        post.rate,
+        post.hourly,
+        post.type
       ]
     end
     @users = User.all
@@ -86,6 +89,16 @@ class PostsController < ApplicationController
     statement[:instruments] = "instruments_posts.instrument_id in (#{params[:instruments].join(',')})" if params[:instruments]
     statement[:genres] = "genres_posts.genre_id in (#{params[:genres].join(',')})" if params[:genres]
     statement[:specialties] = "specialties_posts.specialty_id in (#{params[:specialties].join(',')})" if params[:specialties]
+
+    if(params[:rate][:minimum].present? && params[:rate][:maximum].present?)
+      statement[:rate] = "posts.rate between #{params[:rate][:minimum]} and #{params[:rate][:maximum]}"
+    elsif(params[:rate][:minimum].present?)
+      statement[:rate] = "posts.rate > #{params[:rate][:minimum]}"
+    elsif(params[:rate][:maximum].present?)
+      statement[:rate] = "posts.rate < #{params[:rate][:maximum]}"
+    end
+    
+    statement[:type] = "posts.type = '#{params[:type]}'" if params[:type]
     
     ret = statement.values.compact.join(' and ')
     

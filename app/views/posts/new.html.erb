@@ -6,18 +6,33 @@
   <%= f.text_area :body %></div>
   
   <div>
+    <label>
+      <input type="radio" name="post[type]" value="WorkWantedPost"/>
+      I am looking for work.
+    </label>
+    <label>
+      <input type="radio" name="post[type]" value="HelpWantedPost"/>
+      I am looking for musicians.
+    </label>
+  </div>
+  
+  <div>
     <div>Pick an Instrument</div>
     <% Instrument.all.each do |instrument| %>
-      <input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>"/>
-      <label for="instrument-<%= instrument.name %>"><%= instrument.name %></label>
+      <label>
+        <input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>"/>
+        <%= instrument.name %>
+      </label>
     <% end %>
   </div>
   
   <div>
     <div>Pick a Genre</div>
     <% Genre.all.each do |genre| %>
-      <input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>"/>
-      <label for="genre-<%= genre.name %>"><%= genre.name %></label>
+      <label>
+        <input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>"/>
+        <%= genre.name %>
+      </label>
     <% end %>
   </div>
   
@@ -28,6 +43,12 @@
       <%= specialty.name %>
     </label>
   <% end %>
+  
+  <div>
+    <%= f.label :rate %><br />
+    $<%= f.text_field :rate %>
+    <%= f.label :hourly %>? <%= f.check_box :hourly %>
+  </div>
   
   <%= f.hidden_field :user_id, :value => current_user.id %>
   
