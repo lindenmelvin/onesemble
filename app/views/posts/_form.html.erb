@@ -6,18 +6,18 @@
 
 <div>
   <label>
-    <% if post.type %>
-    <input type="radio" name="post[type]" value="WorkWantedPost"/>
+    <% if post['type'] %>
+      <input type="radio" name="post[type]" value="WorkWantedPost"/>
     <% else %>
-    <input type="radio" name="post[type]" value="WorkWantedPost" "<% if @post.type == 'WorkWantedPost' %>" checked=checked "<% end %>">
+      <input type="radio" name="post[type]" value="WorkWantedPost" "<% if @post.type == 'WorkWantedPost' %>" checked=checked "<% end %>" />
     <% end %>
     I am looking for work.
   </label>
   <label>
-    <% if post.type %>
+    <% if post['type'] %>
     <input type="radio" name="post[type]" value="HelpWantedPost"/>
     <% else %>
-    <input type="radio" name="post[type]" value="HelpWantedPost" "<% if @post.type == 'HelpWantedPost' %>" checked=checked "<% end %>">
+    <input type="radio" name="post[type]" value="HelpWantedPost" "<% if @post.type == 'HelpWantedPost' %>" checked=checked "<% end %>" />
     <% end %>
     I am looking for musicians.
   </label>
