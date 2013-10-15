@@ -1,0 +1,2 @@
+class WorkWantedPost < Post
+end

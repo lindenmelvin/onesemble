@@ -1,0 +1,2 @@
+class HelpWantedPost < Post
+end
