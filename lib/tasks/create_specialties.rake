@@ -7,12 +7,7 @@ namespace :specialties do
     Specialty.destroy_all
     ActiveRecord::Base.connection.execute("truncate table specialties restart identity")
 
-    specialties = [
-      'Accompaniment',
-      'Performance',
-    ]
-
-    specialties.each do |specialty|
+    SPECIALTIES.each do |specialty|
       Specialty.create(:name => specialty)
     end
   end

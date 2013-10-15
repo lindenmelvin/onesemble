@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20131015140622) do
 
+  create_table "cities", :force => true do |t|
+    t.integer "state_id"
+    t.string  "name"
+  end
+
   create_table "genres", :force => true do |t|
     t.string "name"
   end
@@ -52,7 +57,12 @@ ActiveRecord::Schema.define(:version => 20131015140622) do
     t.string   "type"
     t.decimal  "rate"
     t.boolean  "hourly"
+    t.integer  "state_id"
+    t.integer  "city_id"
   end
+
+  add_index "posts", ["city_id"], :name => "index_posts_on_city_id"
+  add_index "posts", ["state_id"], :name => "index_posts_on_state_id"
 
   create_table "specialties", :force => true do |t|
     t.string "name"
@@ -61,6 +71,11 @@ ActiveRecord::Schema.define(:version => 20131015140622) do
   create_table "specialties_posts", :force => true do |t|
     t.integer "specialty_id"
     t.integer "post_id"
+  end
+
+  create_table "states", :force => true do |t|
+    t.string "name"
+    t.string "abbreviation"
   end
 
   create_table "users", :force => true do |t|
@@ -81,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20131015140622) do
     t.string   "last_name"
     t.string   "phone"
     t.decimal  "reputation"
+    t.integer  "state_id"
+    t.integer  "city_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

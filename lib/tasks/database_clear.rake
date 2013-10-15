@@ -15,5 +15,13 @@ namespace :database do
     Genre.destroy_all
     ActiveRecord::Base.connection.execute("truncate table genres restart identity")
 
+    puts "===== Cleaning Specialties ====="
+    Specialty.destroy_all
+    ActiveRecord::Base.connection.execute("truncate table specialties restart identity")
+
+    puts "===== Cleaning Message ====="
+    Message.destroy_all
+    ActiveRecord::Base.connection.execute("truncate table messages restart identity")
+
   end
 end

@@ -73,7 +73,9 @@ class PostsController < ApplicationController
         post_path(post),
         post.rate,
         post.hourly,
-        post.type
+        post.type,
+        post.city.name,
+        post.state.name,
       ]
     end
     @users = User.all
@@ -99,6 +101,9 @@ class PostsController < ApplicationController
     end
     
     statement[:type] = "posts.type = '#{params[:type]}'" if params[:type]
+
+    statement[:city] = "posts.city_id = #{params[:city_id]}" if params[:city_id]
+    statement[:state] = "posts.state_id = #{params[:state_id]}" if params[:state_id]
     
     ret = statement.values.compact.join(' and ')
     

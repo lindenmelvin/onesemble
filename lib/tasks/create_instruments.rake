@@ -7,14 +7,7 @@ namespace :instruments do
     Instrument.destroy_all
     ActiveRecord::Base.connection.execute("truncate table instruments restart identity")
 
-    instruments = [
-      'Piano',
-      'Guitar',
-      'Drums',
-      'Voice',
-    ]
-
-    instruments.each do |instrument|
+    INSTRUMENTS.each do |instrument|
       Instrument.create(:name => instrument)
     end
   end

@@ -19,6 +19,8 @@ $(document).on 'ajax:success', (xhr, data, status) ->
         <a href='#{post[7]}'>Edit Post</a>
         <a href='#{post[8]}'>View Post</a>
         <a href='#{post[9]}' data-confirm='Are you sure?' data-method='delete' rel='nofollow'>Destroy</a>
+        <div>Location: #{post[13]}, #{post[14]}</div>
       </div>
+      <a href='#{post[9]}'>View Post</a>
     ")
     

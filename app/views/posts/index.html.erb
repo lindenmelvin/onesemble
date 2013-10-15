@@ -24,7 +24,26 @@
       </label>
     <% end %>
     <div>
-      
+	
+    <div>Location:</div>
+			<div>State:</div>
+	    <% State.all.each do |state| %>
+	      <label>
+	        <input name="state_id" type="radio" value="<%= state.id %>">
+	        <%= state.name %>
+	      </label>
+	    <% end %>
+
+			<div>City: </div>
+	    <% City.all.each do |city| %>
+	      <label>
+	        <input name="city_id" type="radio" value="<%= city.id %>">
+	        <%= city.name %>
+	      </label>
+	    <% end %>
+	    <div>
+    <div>
+		
     <div>Instrument</div>
     <div>
     <% Instrument.all.each do |instrument| %>
