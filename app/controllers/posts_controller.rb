@@ -74,8 +74,8 @@ class PostsController < ApplicationController
         post.rate,
         post.hourly,
         post.type,
-        post.city.name,
-        post.state.name,
+        (post.city.name rescue ''),
+        (post.state.name rescue ''),
       ]
     end
     @users = User.all

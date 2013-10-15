@@ -8,5 +8,5 @@
   <div>Genres: <%= post.genres.collect { |genre| genre.name }.join(', ') %></div>
   <div>Specialties: <%= post.specialties.collect { |specialty| specialty.name }.join(', ') %></div>
   <div>Rate: $<%= '%.2f' % post.rate rescue '' %><% if post.hourly %> / hour<% end %></div>
-  <div>Location: <%= post.city.name %>, <%= post.state.name %></div>
+  <div>Location: <%= post.city.name rescue '' %>, <%= post.state.name rescue '' %></div>
 </div>
