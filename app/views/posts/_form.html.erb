@@ -116,13 +116,25 @@
     <% end %>
   </label>
 
+  <% if post.hourly? && post.hourly %>
   <label>
-    <% if post.hourly %>
-      <input type="checkbox" name="post[hourly]" checked=checked />Hourly?
-    <% else %>
-      <input type="checkbox" name="post[hourly]"/>Hourly?
-    <% end %>
+    <input type="radio" name="post[hourly]" value="true" checked=checked />Hourly?
   </label>
+
+  <label>
+    <input type="radio" name="post[hourly]" value="false"/>Flat Rate
+  </label>
+
+  <% else %>
+  <label>
+    <input type="radio" name="post[hourly]" value="true"/>Hourly?
+  </label>
+
+  <label>
+    <input type="radio" name="post[hourly]" value="false" checked=checked/>Flat Rate
+  </label>
+    
+  <% end %>
 </div>
 
-<%= f.hidden_field :user_id, :value => current_user.id %>
+<input type="hidden" name="post[user_id]" value="<%= current_user.id %>"/>
