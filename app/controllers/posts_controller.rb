@@ -68,8 +68,6 @@ class PostsController < ApplicationController
         post.instruments.collect { |instrument| instrument.name }.join(', '), 
         post.genres.collect { |genre| genre.name }.join(', '), 
         post.specialties.collect { |specialty| specialty.name }.join(', '),
-        edit_post_path(post),
-        post_path(post),
         post_path(post),
         post.rate,
         post.hourly,
