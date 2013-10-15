@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     params[:instrument_ids].each { |instrument_id| @post.instruments << Instrument.find(instrument_id)} if params[:instrument_ids]
     params[:specialty_ids].each { |specialty_id| @post.specialties << Specialty.find(specialty_id)} if params[:specialty_ids]
     if @post.save
-      redirect_to posts_path
+      redirect_to post_path(@post)
     else
       flash[:error] = "Error Creating Post"
       render :action => :new

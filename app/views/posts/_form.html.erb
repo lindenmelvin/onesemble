@@ -1,23 +1,37 @@
-<div><%= f.label :subject %><br />
-<%= f.text_field :subject %></div>
+<div>
+  <label>
+    Subject
+    <% if post.subject %>
+      <input type="text" name="post[subject]" value="<%= post.subject %>"/>
+    <% else %>
+      <input type="text" name="post[subject]"/>
+    <% end %>
+  </label>
 
-<div><%= f.label :body %><br />
-<%= f.text_area :body %></div>
+  <label>
+    Body
+    <% if post.body? %>
+      <input type="text" name="post[body]" value="<%= post.body %>"/>
+    <% else %>
+      <input type="text" name="post[body]"/>
+    <% end %>
+  </label>
+</div>
 
 <div>
   <label>
-    <% if post['type'] %>
-      <input type="radio" name="post[type]" value="WorkWantedPost"/>
+    <% if post.type? %>
+      <input type="radio" name="post[type]" value="WorkWantedPost" "<% if post.type == 'WorkWantedPost' %>" checked=checked "<% end %>" />
     <% else %>
-      <input type="radio" name="post[type]" value="WorkWantedPost" "<% if @post.type == 'WorkWantedPost' %>" checked=checked "<% end %>" />
+      <input type="radio" name="post[type]" value="WorkWantedPost"/>
     <% end %>
     I am looking for work.
   </label>
   <label>
-    <% if post['type'] %>
-    <input type="radio" name="post[type]" value="HelpWantedPost"/>
+    <% if post.type? %>
+      <input type="radio" name="post[type]" value="HelpWantedPost" "<% if post.type == 'HelpWantedPost' %>" checked=checked "<% end %>" />
     <% else %>
-    <input type="radio" name="post[type]" value="HelpWantedPost" "<% if @post.type == 'HelpWantedPost' %>" checked=checked "<% end %>" />
+      <input type="radio" name="post[type]" value="HelpWantedPost"/>
     <% end %>
     I am looking for musicians.
   </label>
@@ -92,9 +106,23 @@
 <% end %>
 
 <div>
-  <%= f.label :rate %><br />
-  $<%= f.text_field :rate %>
-  <%= f.label :hourly %>? <%= f.check_box :hourly %>
+  <label>
+    Rate
+  <br />
+    <% if post.rate? %>
+      <input type="text" name="post[rate]" value="<%= post.rate.to_i %>"/>
+    <% else %>
+      <input type="text" name="post[rate]"/>
+    <% end %>
+  </label>
+
+  <label>
+    <% if post.hourly %>
+      <input type="checkbox" name="post[hourly]" checked=checked />Hourly?
+    <% else %>
+      <input type="checkbox" name="post[hourly]"/>Hourly?
+    <% end %>
+  </label>
 </div>
 
 <%= f.hidden_field :user_id, :value => current_user.id %>
