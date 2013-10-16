@@ -5,6 +5,13 @@ class UsersController< ApplicationController
   end
   
   def edit
+    @states = State.all.collect do |state| 
+      { 
+        name: state.name, 
+        id: state.id,
+        cities: state.cities.collect { |city| { name: city.name, id: city.id } }
+      }
+    end
   end
   
   def update

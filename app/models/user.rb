@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   
   has_many :posts
+  has_many :ratings
   belongs_to :state
   belongs_to :city
   

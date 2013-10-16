@@ -11,12 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015140622) do
+ActiveRecord::Schema.define(:version => 20131016163021) do
 
   create_table "cities", :force => true do |t|
     t.integer "state_id"
     t.string  "name"
   end
+
+  create_table "contracts", :force => true do |t|
+    t.boolean  "complete",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "contracts_users", :force => true do |t|
+    t.integer "user_id"
+    t.integer "contract_id"
+  end
+
+  add_index "contracts_users", ["contract_id"], :name => "index_contracts_users_on_contract_id"
+  add_index "contracts_users", ["user_id"], :name => "index_contracts_users_on_user_id"
 
   create_table "genres", :force => true do |t|
     t.string "name"
@@ -63,6 +77,31 @@ ActiveRecord::Schema.define(:version => 20131015140622) do
 
   add_index "posts", ["city_id"], :name => "index_posts_on_city_id"
   add_index "posts", ["state_id"], :name => "index_posts_on_state_id"
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "rater_id"
+    t.integer  "contract_id"
+    t.integer  "rating"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "ratings", ["contract_id"], :name => "index_ratings_on_contract_id"
+  add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
+  add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
+
+  create_table "requests", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.boolean  "pending"
+    t.boolean  "accepted"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "requests", ["receiver_id"], :name => "index_requests_on_receiver_id"
+  add_index "requests", ["sender_id"], :name => "index_requests_on_sender_id"
 
   create_table "specialties", :force => true do |t|
     t.string "name"
