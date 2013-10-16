@@ -1,139 +1,117 @@
 <div>
-  <label>
-    Subject
-    <% if post.subject %>
-      <input type="text" name="post[subject]" value="<%= post.subject %>"/>
-    <% else %>
-      <input type="text" name="post[subject]"/>
-    <% end %>
-  </label>
+  <label>Subject</label>
+  <% if post.subject %>
+    <input type="text" data-required="true" name="post[subject]" value="<%= post.subject %>" />
+  <% else %>
+    <input type="text" data-required="true" name="post[subject]" />
+  <% end %>
 
-  <label>
-    Body
-    <% if post.body? %>
-      <input type="text" name="post[body]" value="<%= post.body %>"/>
-    <% else %>
-      <input type="text" name="post[body]"/>
-    <% end %>
-  </label>
+  <label>Body</label>
+  <% if post.body? %>
+    <input type="text" data-required="true" name="post[body]" value="<%= post.body %>"/>
+  <% else %>
+    <input type="text" data-required="true" name="post[body]"/>
+  <% end %>
 </div>
 
 <div>
-  <label>
-    <% if post.type? %>
-      <input type="radio" name="post[type]" value="WorkWantedPost" "<% if post.type == 'WorkWantedPost' %>" checked=checked "<% end %>" />
-    <% else %>
-      <input type="radio" name="post[type]" value="WorkWantedPost"/>
-    <% end %>
-    I am looking for work.
-  </label>
-  <label>
-    <% if post.type? %>
-      <input type="radio" name="post[type]" value="HelpWantedPost" "<% if post.type == 'HelpWantedPost' %>" checked=checked "<% end %>" />
-    <% else %>
-      <input type="radio" name="post[type]" value="HelpWantedPost"/>
-    <% end %>
-    I am looking for musicians.
-  </label>
+  <% if post.type? %>
+    <input type="radio" name="post[type]" value="WorkWantedPost" "<% if post.type == 'WorkWantedPost' %>" checked=checked "<% end %>" data-required="true"/>
+  <% else %>
+    <input type="radio" name="post[type]" value="WorkWantedPost" data-required="true"/>
+  <% end %>
+  <label>I am looking for work.</label>
+  
+  <% if post.type? %>
+    <input type="radio" name="post[type]" value="HelpWantedPost" "<% if post.type == 'HelpWantedPost' %>" checked=checked "<% end %>" data-required="true"/>
+  <% else %>
+    <input type="radio" name="post[type]" value="HelpWantedPost" data-required="true"/>
+  <% end %>
+  <label>I am looking for musicians.</label>
+  
 </div>
 
 <div>
 	<div>State</div>
 	<% State.all.each do |state| %>
-		<label>
-			<% if post.state %>
-				<input name="post[state_id]" type="radio" value="<%= state.id %>" "<% if post.state.id == state.id %>" checked=checked "<% end %>">
-			<% else %>
-				<input name="post[state_id]" type="radio" value="<%= state.id %>">
-			<% end %>
-			<%= state.name %>
-		</label>
+		<% if post.state %>
+			<input name="post[state_id]" type="radio" value="<%= state.id %>" "<% if post.state.id == state.id %>" checked=checked "<% end %>" data-required="true">
+		<% else %>
+			<input name="post[state_id]" type="radio" value="<%= state.id %>" data-required="true">
+		<% end %>
+	  <label><%= state.name %></label>
 	<% end %>
 </div>
 
 <div>
 	<div>City</div>
 	<% City.all.each do |city| %>
-		<label>
-			<% if post.city %>
-				<input name="post[city_id]" type="radio" value="<%= city.id %>" "<% if post.city.id == city.id %>" checked=checked "<% end %>">
-			<% else %>
-				<input name="post[city_id]" type="radio" value="<%= city.id %>">
-			<% end %>
-			<%= city.name %>
-		</label>
+		<% if post.city %>
+			<input name="post[city_id]" type="radio" value="<%= city.id %>" "<% if post.city.id == city.id %>" checked=checked "<% end %>" data-required="true">
+		<% else %>
+			<input name="post[city_id]" type="radio" value="<%= city.id %>" data-required="true">
+		<% end %>
+		<label><%= city.name %></label>
 	<% end %>
 </div>
 
 <div>
   <div>Pick an Instrument</div>
   <% Instrument.all.each do |instrument| %>
-		<label>
-			<% if post.instruments %>
-	    	<input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>" "<% if post.instruments.map(&:id).include?(instrument.id) %>" checked=checked "<% end %>"/>
-			<% else %>
-				<input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>">
-			<% end %>
-	    <%= instrument.name %>
-		</label>
+    <label><%= instrument.name %></label>
+		<% if post.instruments %>
+    	<input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>" "<% if post.instruments.map(&:id).include?(instrument.id) %>" checked=checked "<% end %>" data-mincheck="1"/>
+		<% else %>
+			<input type="checkbox" id="instrument-<%= instrument.name %>" name="instrument_ids[]" value="<%= instrument.id %>" data-mincheck="1" />
+		<% end %>
   <% end %>
 </div>
 
 <div>
   <div>Pick a Genre</div>
   <% Genre.all.each do |genre| %>
-		<label>
-			<% if post.genres %>
-	    	<input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>" "<% if post.genres.map(&:id).include?(genre.id) %>" checked=checked "<% end %>"/>
-			<% else %>
-				<input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>">
-			<% end %>
-	    <%= genre.name %>
-		</label>
+		<% if post.genres %>
+    	<input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>" "<% if post.genres.map(&:id).include?(genre.id) %>" checked=checked "<% end %>" data-mincheck="1" />
+		<% else %>
+			<input type="checkbox" id="genre-<%= genre.name %>" name="genre_ids[]" value="<%= genre.id %>" data-mincheck="1" />
+		<% end %>
+		<label><%= genre.name %></label>
   <% end %>
 </div>
 
 <div>Specialty</div>
+<div>
 <% Specialty.all.each do |specialty| %>
-  <label>
-		<% if post.specialties %>
-    	<input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>" "<% if post.specialties.map(&:id).include?(specialty.id) %>" checked=checked "<% end %>">
-		<% else %>
-			<input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>">
-		<% end %>
-    <%= specialty.name %>
-  </label>
+	<% if post.specialties %>
+  	<input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>" "<% if post.specialties.map(&:id).include?(specialty.id) %>" checked=checked "<% end %>" data-mincheck="1" />
+	<% else %>
+		<input name="specialty_ids[]" type="checkbox" value="<%= specialty.id %>" data-mincheck="1" />
+	<% end %>
+  <label><%= specialty.name %></label>
 <% end %>
+</div>
 
 <div>
-  <label>
-    Rate
-  <br />
-    <% if post.rate? %>
-      <input type="text" name="post[rate]" value="<%= post.rate.to_i %>"/>
-    <% else %>
-      <input type="text" name="post[rate]"/>
-    <% end %>
-  </label>
+  <label>Rate</label><br />
+  <% if post.rate? %>
+    <input type="text" data-required="true" name="post[rate]" value="<%= post.rate.to_i %>" />
+  <% else %>
+    <input type="text" data-required="true" name="post[rate]" />
+  <% end %>
+  
 
   <% if post.hourly? && post.hourly %>
-  <label>
-    <input type="radio" name="post[hourly]" value="true" checked=checked />Hourly?
-  </label>
+    <input type="radio" data-required="true" name="post[hourly]" value="true" checked=checked />
+    <label>Hourly?</label>
 
-  <label>
-    <input type="radio" name="post[hourly]" value="false"/>Flat Rate
-  </label>
-
+    <input type="radio" data-required="true" name="post[hourly]" value="false" />
+    <label>Flat Rate</label>
   <% else %>
-  <label>
-    <input type="radio" name="post[hourly]" value="true"/>Hourly?
-  </label>
+    <input type="radio" data-required="true" name="post[hourly]" value="true" />
+    <label>Hourly?</label>
 
-  <label>
-    <input type="radio" name="post[hourly]" value="false" checked=checked/>Flat Rate
-  </label>
-    
+    <input type="radio" data-required="true" name="post[hourly]" value="false" checked=checked />
+    <label>Flat Rate</label>
   <% end %>
 </div>
 
