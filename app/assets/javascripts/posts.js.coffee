@@ -20,4 +20,10 @@ $(document).on 'ajax:success', (xhr, data, status) ->
       </div>
       <a href='#{post[7]}'>View Post</a>
     ")
-    
+
+$(document).on 'ready', ->
+  $('.state-select').on 'change', (event) ->
+    cities = $('.state-select option:selected').data('cities')
+    $('.city-select').empty()
+    for city in cities
+      $('.city-select').append("<option value='#{city.id}'>#{city.name}</option>")

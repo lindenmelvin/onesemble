@@ -27,4 +27,13 @@ STATES = [
       "San Diego",
     ]
   },
+  
+  {
+    "name" => "Oregon",
+    "abbreviation" => "OR",
+    "cities" => [
+      "Portland",
+      "Eugene",
+    ]
+  },
 ]

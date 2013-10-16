@@ -6,7 +6,4 @@
   <% unread_messages =  Message.where(receiver_id: current_user.id, read: false) %>
   <a href="<%= messages_path %>"> Messages<% if unread_messages.present? %>(<%= unread_messages.count %>)<% end %></a>
   <%= link_to "Logout", '/logout' %>
-<% else %>
-  <%= link_to "Login", '/login' %>
-  <%= link_to "Signup", '/signup' %>
 <% end %>

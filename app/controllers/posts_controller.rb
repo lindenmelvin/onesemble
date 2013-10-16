@@ -1,6 +1,13 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    @states = State.all.collect do |state| 
+      { 
+        name: state.name, 
+        id: state.id,
+        cities: state.cities.collect { |city| { name: city.name, id: city.id } }
+      }
+    end
   end
   
   def show
@@ -9,6 +16,13 @@ class PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @states = State.all.collect do |state| 
+      { 
+        name: state.name, 
+        id: state.id,
+        cities: state.cities.collect { |city| { name: city.name, id: city.id } }
+      }
+    end
   end
   
   def create
@@ -26,6 +40,13 @@ class PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
+    @states = State.all.collect do |state| 
+      { 
+        name: state.name, 
+        id: state.id,
+        cities: state.cities.collect { |city| { name: city.name, id: city.id } }
+      }
+    end
   end
   
   def update

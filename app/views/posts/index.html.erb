@@ -24,25 +24,18 @@
       </label>
     <% end %>
     <div>
-	
-    <div>Location:</div>
-			<div>State:</div>
-	    <% State.all.each do |state| %>
-	      <label>
-	        <input name="state_id" type="radio" value="<%= state.id %>">
-	        <%= state.name %>
-	      </label>
-	    <% end %>
 
-			<div>City: </div>
-	    <% City.all.each do |city| %>
-	      <label>
-	        <input name="city_id" type="radio" value="<%= city.id %>">
-	        <%= city.name %>
-	      </label>
-	    <% end %>
-	    <div>
-    <div>
+    <select name='state_id' class="state-select">
+      <% @states.each do |state| %>
+        <option value="<%= state[:id] %>" data-cities="<%= state[:cities].to_json %>"><%= state[:name] %></option>
+      <% end %>
+  	</select>
+
+  	<select name='city_id' class="city-select">
+      <% @states[0][:cities].each do |city| %>
+        <option value="<%= city[:id] %>"><%= city[:name] %></option>
+      <% end %>
+  	</select>
 		
     <div>Instrument</div>
     <div>
