@@ -5,6 +5,5 @@
   <%= f.hidden_field :sender_id, :value => current_user.id %>
   <%= f.hidden_field :receiver_id, :value => @receiver_id %>
   <%= f.hidden_field :parent_id %>
-  
-  <div><%= f.submit "Send Message" %></div>
+  <%= f.submit "Send Message" %>
 <% end %>

@@ -88,5 +88,11 @@
   <% @posts.each do |post| %>
     <%= render 'post', post: post %>
     <a href="<%= post_path(post) %>">View Post</a>
+    <%= form_for Request.new do |f| %>
+      <%= f.hidden_field :sender_id, value: current_user.id %>
+      <%= f.hidden_field :receiver_id, value: post.user_id %>
+      <%= f.hidden_field :pending, value: true %>
+      <%= f.submit "Send Request" %>
+    <% end %>
   <% end %>
 </div>

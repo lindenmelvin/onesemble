@@ -1,0 +1,21 @@
+<h4>New Requests</h4>
+<% if @pending_requests.present? %>
+  <% @pending_requests.each do |request| %>
+    <div>From: <%= User.find(request.sender_id).email %></div>
+  
+    <%= button_to 'Accept', request_path(request, :'request[pending]' => false, :'request[accepted]' => true ), method: :put %>
+    <%= button_to 'Decline', request_path(request, :'request[pending]' => false, :'request[accepted]' => false ), method: :put %>
+  <% end %>
+<% else %>
+  <div>No pending requests</div>
+<% end %>
+
+<h4>Sent Requests</h4>
+<% if @sent_requests.present? %>
+  <% @sent_requests.each do |request| %>
+    <div>Sent to: <%= User.find(request.receiver_id).email %></div>
+    <div>Accepted?: <%= request.accepted ? 'Yes' : 'No' %>
+  <% end %>
+<% else %>
+  <div>No sent requests</div>
+<% end %>

@@ -5,5 +5,8 @@
   <%= link_to "Posts", posts_path %>
   <% unread_messages =  Message.where(receiver_id: current_user.id, read: false) %>
   <a href="<%= messages_path %>"> Messages<% if unread_messages.present? %>(<%= unread_messages.count %>)<% end %></a>
+  
+  <% new_requests = Request.where(receiver_id: current_user.id, pending: true) %>
+  <a href="<%= requests_path %>"> Requests<% if new_requests.present? %>(<%= new_requests.count %>)<% end %></a>
   <%= link_to "Logout", '/logout' %>
 <% end %>
