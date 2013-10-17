@@ -17,6 +17,17 @@ class RequestsController < ApplicationController
   
   def update
     @request = Request.find(params[:id])
+    
+    if params[:request][:accepted] == 'true'
+      @contract = Contract.create
+      user_a = User.find(params[:sender_id])
+      user_b = User.find(params[:receiver_id])
+      @contract.users << user_a
+      @contract.users << user_b
+      @contract.ratings.create(user_id: user_a.id, rater_id: user_b.id)
+      @contract.ratings.create(user_id: user_b.id, rater_id: user_a.id)
+    end
+    
     if @request.update_attributes(params[:request])
       flash[:notice] = "Successfully responsed to request"
       redirect_to user_path(current_user)

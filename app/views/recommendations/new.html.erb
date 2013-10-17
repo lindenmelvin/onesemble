@@ -1,0 +1,6 @@
+<%= form_for @recommendation, html: {data: {validate: 'parsley'}} do |f| %>
+
+<%= render 'form', recommendation: @recommendation, f: f %>
+<div><%= f.submit "Create Recommendation" %></div>
+
+<% end %>

@@ -3,7 +3,7 @@
   <% @pending_requests.each do |request| %>
     <div>From: <%= User.find(request.sender_id).email %></div>
   
-    <%= button_to 'Accept', request_path(request, :'request[pending]' => false, :'request[accepted]' => true ), method: :put %>
+    <%= button_to 'Accept', request_path(request, :'request[pending]' => false, :'request[accepted]' => true, sender_id: request.sender_id, receiver_id: request.receiver_id ), method: :put %>
     <%= button_to 'Decline', request_path(request, :'request[pending]' => false, :'request[accepted]' => false ), method: :put %>
   <% end %>
 <% else %>
@@ -14,7 +14,7 @@
 <% if @sent_requests.present? %>
   <% @sent_requests.each do |request| %>
     <div>Sent to: <%= User.find(request.receiver_id).email %></div>
-    <div>Accepted?: <%= request.accepted ? 'Yes' : 'No' %>
+    <div>Status: <%= request.pending ? 'Pending' : request.accepted ? 'Accepted' : 'Rejected' %>
   <% end %>
 <% else %>
   <div>No sent requests</div>

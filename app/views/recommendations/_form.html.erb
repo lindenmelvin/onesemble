@@ -1,0 +1,4 @@
+<%= f.text_field :subject, placeholder: 'Subject' %>
+<%= f.text_area :body, placeholder: 'Body' %>
+<%= f.hidden_field :user_id, value: @user_id if @user_id %>
+<%= f.hidden_field :recommender_id, value: current_user.id %>

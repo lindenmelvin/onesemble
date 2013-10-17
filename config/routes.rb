@@ -14,6 +14,12 @@ Onesemble::Application.routes.draw do
   end
   
   resources :messages
+  
   resources :users
+  
   resources :requests
+  resources :recommendations
+  resources :ratings
+  
+  match '/profile' => 'users#profile'
 end

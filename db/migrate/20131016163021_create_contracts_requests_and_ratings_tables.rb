@@ -30,7 +30,7 @@ class CreateContractsRequestsAndRatingsTables < ActiveRecord::Migration
       t.integer :user_id
       t.integer :rater_id
       t.integer :contract_id
-      t.integer :rating
+      t.integer :score
       
       t.timestamps
     end
@@ -41,5 +41,9 @@ class CreateContractsRequestsAndRatingsTables < ActiveRecord::Migration
   end
 
   def down
+    drop_table :contracts
+    drop_table :contracts_users
+    drop_table :requests
+    drop_table :ratings
   end
 end

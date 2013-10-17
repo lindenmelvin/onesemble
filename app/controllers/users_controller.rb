@@ -1,7 +1,17 @@
 class UsersController< ApplicationController
   
+  def index
+  end
+  
   def show
-    @posts = current_user.posts
+    @user = User.find(params[:id])
+    @posts = @user.posts
+    @recommendations = @user.recommendations
+    @open_contracts = @user.contracts.where(complete: false)
+    @complete_contracts = @user.contracts.where(complete: true)
+    ratings = @user.ratings.where("score is not null").collect { |rating| rating.score }
+    total = ratings.inject{ |sum, x| sum + x }
+    @rating = (total / ratings.count) rescue 0
   end
   
   def edit
@@ -25,4 +35,16 @@ class UsersController< ApplicationController
       render :action => 'edit'
     end
   end
+  
+  def profile
+    @posts = current_user.posts
+    @recommendations = current_user.recommendations
+    @open_contracts = current_user.contracts.where(complete: false)
+    @complete_contracts = current_user.contracts.where(complete: true)
+    ratings = current_user.ratings.where("score is not null").collect { |rating| rating.score }
+    total = ratings.inject{ |sum, x| sum + x }
+    @rating = (total / ratings.count) rescue 0
+    render :profile
+  end
+  
 end

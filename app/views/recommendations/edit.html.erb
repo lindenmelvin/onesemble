@@ -1,0 +1,5 @@
+<%= form_for @recommendation, html: {data: {validate: 'parsley'}}, url: recommendation_path(@recommendation) do |f| %>
+
+  <%= render 'form', recommendation: @recommendation, f: f %>
+  <div><%= f.submit "Update Recommendation" %></div>
+<% end %>

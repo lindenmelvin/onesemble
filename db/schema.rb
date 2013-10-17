@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016163021) do
+ActiveRecord::Schema.define(:version => 20131017141017) do
 
   create_table "cities", :force => true do |t|
     t.integer "state_id"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20131016163021) do
     t.integer  "user_id"
     t.integer  "rater_id"
     t.integer  "contract_id"
-    t.integer  "rating"
+    t.integer  "score"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(:version => 20131016163021) do
   add_index "ratings", ["contract_id"], :name => "index_ratings_on_contract_id"
   add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
   add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
+
+  create_table "recommendations", :force => true do |t|
+    t.integer "user_id"
+    t.integer "recommender_id"
+    t.string  "subject"
+    t.text    "body"
+  end
+
+  add_index "recommendations", ["recommender_id"], :name => "index_recommendations_on_recommender_id"
+  add_index "recommendations", ["user_id"], :name => "index_recommendations_on_user_id"
 
   create_table "requests", :force => true do |t|
     t.integer  "sender_id"

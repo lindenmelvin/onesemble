@@ -1,20 +1,36 @@
-<% if current_user.first_name.present? %>
-  <h1><%= current_user.first_name %>'s Profile</h1>
+<% if @user.first_name.present? %>
+  <h1><%= @user.first_name %>'s Profile</h1>
 <% else %>
-  <h1><%= current_user.email %>'s Profile</h1>
+  <h1><%= @user.email %>'s Profile</h1>
 <% end %>
 
-<div>First Name: <%= current_user.first_name %></div>
-<div>Last Name: <%= current_user.last_name %></div>
-<div>Email: <%= current_user.email %></div>
-<div>State: <%= current_user.state.name rescue 'N/A' %></div>
-<div>City: <%= current_user.city.name rescue 'N/A' %></div>
+<div>Rating: <%= @rating %></div>
 
-<h1>Your Posts</h1>
+<div>First Name: <%= @user.first_name %></div>
+<div>Last Name: <%= @user.last_name %></div>
+<div>Email: <%= @user.email %></div>
+<div>State: <%= @user.state.name rescue 'N/A' %></div>
+<div>City: <%= @user.city.name rescue 'N/A' %></div>
 
-<% @posts.each do |post| %>
-  <%= render 'posts/post', post: post %>
-  <a href="<%= post_path(post) %>">View Post</a>
-  <a href="<%= edit_post_path(post) %>">Edit Post</a>
-  <a href="<%= post_path(post) %>" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a>
+<% unless @user.id == current_user.id %>
+  <%= form_for Request.new do |f| %>
+    <%= f.hidden_field :sender_id, value: current_user.id %>
+    <%= f.hidden_field :receiver_id, value: @user.id %>
+    <%= f.hidden_field :pending, value: true %>
+    <%= f.submit "Send Request" %>
+  <% end %>
+<% end %>
+
+<%= link_to "Write Recommendation", new_recommendation_path(user_id: @user.id) unless @user.id == current_user.id %>
+<h1>Recommendations</h1>
+<% @recommendations.each do |recommendation| %>
+  <div>
+    <div>Written By: <%= User.find(recommendation.recommender_id).email %></div>
+    <div>Subject: <%= recommendation.subject %></div>
+    <div>Body: <%= recommendation.body %></div>
+    <% if recommendation.recommender_id == current_user.id %>
+      <a href="<%= edit_recommendation_path(recommendation) %>">Edit Recommendation</a>
+      <a href="<%= recommendation_path(recommendation) %>" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a>
+    <% end %>
+  </div>
 <% end %>
