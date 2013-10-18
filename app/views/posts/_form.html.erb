@@ -94,9 +94,10 @@
 
 <div>
   <label>Time</label><br />
+	<% all_day = false %>
   <% if post.start_date? %>
     <% all_day = post.all_day == true %>
-    All Day: <input id="all-day" type="checkbox" name="post[all_day]" "<% if all_day %>" checked=checked "<% end %>"/>
+    All Day: <input id="all-day" type="checkbox" name="all_day" "<% if all_day %>" checked=checked "<% end %>"/>
     <label>Start Time:
       <%= datetime_select :post, :start_date, selected: post.start_date %>
     </label>
@@ -114,6 +115,7 @@
       <%= datetime_select :post, :end_date, start_year: 2013, prompt: { day: 'Select day', month: 'Select month', year: 'Select year', hour: 'Select hour', minute: 'Select minute' } %>
     </label>
   <% end %>
+	<input type="hidden" name='post[all_day]' id='hidden-all-day', value="<%= all_day %>" />
 </div>
 
 <div>

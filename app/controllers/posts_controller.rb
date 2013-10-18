@@ -26,8 +26,6 @@ class PostsController < ApplicationController
   end
   
   def create
-    # params[:post][:start_date] = create_date(params[:start_date])
-    # params[:post][:end_date] = create_date(params[:end_date])
     @post = Post.create(params[:post])
     params[:genre_ids].each { |genre_id| @post.genres << Genre.find(genre_id)} if params[:genre_ids]
     params[:instrument_ids].each { |instrument_id| @post.instruments << Instrument.find(instrument_id)} if params[:instrument_ids]
@@ -52,8 +50,6 @@ class PostsController < ApplicationController
   end
   
   def update
-    # params[:post][:start_date] = create_date(params[:start_date])
-    # params[:post][:end_date] = create_date(params[:end_date])
     @post = Post.find(params[:id])
     @post.update_attributes(params[:post])
     @post.genres.destroy_all
@@ -99,6 +95,8 @@ class PostsController < ApplicationController
         post.type,
         (post.city.name rescue ''),
         (post.state.name rescue ''),
+        post.create_date(post.start_date, post.all_day),
+        post.create_date(post.end_date, post.all_day),
       ]
     end
     @users = User.all
@@ -110,6 +108,7 @@ class PostsController < ApplicationController
   def create_sql_statement
     statement = {}
 
+    statement[:date] = construct_date_statement if params[:post][:'start_date(1i)'] != ''
     statement[:users] = "posts.user_id in (#{params[:users].join(',')})" if params[:users]
     statement[:instruments] = "instruments_posts.instrument_id in (#{params[:instruments].join(',')})" if params[:instruments]
     statement[:genres] = "genres_posts.genre_id in (#{params[:genres].join(',')})" if params[:genres]
@@ -133,10 +132,20 @@ class PostsController < ApplicationController
     ret
   end
   
-  def create_date(date_hash)
-    hour = date_hash[:hour] || 0
-    minute = date_hash[:minute] || 0
+  def construct_date_statement
+    if params[:post][:'start_date(4i)']
+      start_date = DateTime.new(params[:post][:'start_date(1i)'].to_i, params[:post][:'start_date(2i)'].to_i, params[:post][:'start_date(3i)'].to_i, params[:post][:'start_date(4i)'].to_i, params[:post][:'start_date(5i)'].to_i)
+    else
+      start_date = DateTime.new(params[:post][:'start_date(1i)'].to_i, params[:post][:'start_date(2i)'].to_i, params[:post][:'start_date(3i)'].to_i)
+    end
     
-    return DateTime.new(date_hash[:year].to_i, date_hash[:month].to_i, date_hash[:day].to_i, hour.to_i, minute.to_i)
+    if params[:post][:'end_date(4i)']
+      end_date = DateTime.new(params[:post][:'end_date(1i)'].to_i, params[:post][:'end_date(2i)'].to_i, params[:post][:'end_date(3i)'].to_i, params[:post][:'end_date(4i)'].to_i, params[:post][:'end_date(5i)'].to_i)
+    else
+      end_date = DateTime.new(params[:post][:'end_date(1i)'].to_i, params[:post][:'end_date(2i)'].to_i, params[:post][:'end_date(3i)'].to_i)
+    end
+
+    return "posts.start_date >= #{to_timestamp('#{start_date}', 'YYYY-MM-dd HH:MI:SS.MS')} and posts.end_date <= #{to_timestamp('#{end_date}', 'YYYY-MM-dd HH:MI:SS.MS')}"
   end
+  
 end

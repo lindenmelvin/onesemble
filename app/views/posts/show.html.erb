@@ -1,4 +1,3 @@
 <%= render 'post', post: @post %>
 <%= link_to 'Message', new_message_path(:receiver_id => @post.user.id ) %> 
 <%= link_to 'Edit Post', edit_post_path(@post) if @post.user == current_user %>
-<!-- unless @post.user_id == current_user.id -->

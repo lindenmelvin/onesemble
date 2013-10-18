@@ -1,10 +1,10 @@
 <div class="message">
-  <%= User.find(@message.sender_id).email %> says: <%= @message.body %>
+  <%= @message.sender.email %> says: <%= @message.body %>
 </div>
 
 <% @message.children.arrange(:order => :created_at).each do |message| %>
   <div class="message">
-    <%= User.find(message[0].sender_id).email %> says: <%= message[0].body %>
+    <%= message[0].sender.email %> says: <%= message[0].body %>
   </div>
 <% end %>
 

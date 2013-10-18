@@ -65,6 +65,15 @@
       </label>
     <% end %>
     <div>
+	
+		Any Time of Day: <input id="all-day" type="checkbox" name="all_day" />
+    <label>Start Time:
+      <%= datetime_select :post, :start_date, start_year: 2013, prompt: { day: 'Select day', month: 'Select month', year: 'Select year', hour: 'Select hour', minute: 'Select minute' } %>
+    </label>
+
+    <label>End Time:
+      <%= datetime_select :post, :end_date, start_year: 2013, prompt: { day: 'Select day', month: 'Select month', year: 'Select year', hour: 'Select hour', minute: 'Select minute' } %>
+    </label>
       
     <div>Rate</div>
     <div>

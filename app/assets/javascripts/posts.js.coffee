@@ -18,6 +18,8 @@ $(document).on 'ajax:success', (xhr, data, status) ->
           <div>Specialties: #{post[6]} </div>
           <div> Rate: $#{rate_string} </div>
           <div>Location: #{post[11]}, #{post[12]}</div>
+          <div>Start: #{post[13]}</div>
+          <div>End: #{post[14]}</div>
         </div>
         <a href='#{post[7]}'>View Post</a>
       ")
@@ -37,5 +39,7 @@ $(document).on 'ready', ->
   $('#all-day').on 'change', (event) ->
     if $('#all-day:checked').length
       $('#post_start_date_4i, #post_start_date_5i, #post_end_date_4i, #post_end_date_5i').attr('disabled', true)
+      $('#hidden-all-day').val(true)
     else
       $('#post_start_date_4i, #post_start_date_5i, #post_end_date_4i, #post_end_date_5i').removeAttr('disabled')
+      $('#hidden-all-day').val(false)

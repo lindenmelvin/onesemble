@@ -5,7 +5,7 @@
     <% next unless message.root? %>
     <div class="message">
       <% if @unread_messages.include?(message) %><div>(unread)</div><% end %>
-      <div>From: <%= User.find(message.sender_id).email %></div>
+      <div>From: <%= message.sender.email %></div>
       <div>Body: <%= message.body %></div>
       <%= link_to "View Thread", message_path(message) %>
     </div>

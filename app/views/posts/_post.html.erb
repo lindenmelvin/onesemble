@@ -9,4 +9,6 @@
   <div>Specialties: <%= post.specialties.collect { |specialty| specialty.name }.join(', ') %></div>
   <div>Rate: $<%= '%.2f' % post.rate rescue '' %><% if post.hourly %> / hour<% end %></div>
   <div>Location: <%= post.city.name rescue '' %>, <%= post.state.name rescue '' %></div>
+  <div>Start: <%= post.create_date(post.start_date, post.all_day) %> </div>
+  <div>End: <%= post.create_date(post.end_date, post.all_day) %> </div>
 </div>
