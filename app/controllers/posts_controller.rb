@@ -145,7 +145,7 @@ class PostsController < ApplicationController
       end_date = DateTime.new(params[:post][:'end_date(1i)'].to_i, params[:post][:'end_date(2i)'].to_i, params[:post][:'end_date(3i)'].to_i)
     end
 
-    return "posts.start_date >= #{to_timestamp('#{start_date}', 'YYYY-MM-dd HH:MI:SS.MS')} and posts.end_date <= #{to_timestamp('#{end_date}', 'YYYY-MM-dd HH:MI:SS.MS')}"
+    return "posts.start_date >= '#{start_date}' and posts.end_date <= '#{end_date}'"
   end
   
 end
