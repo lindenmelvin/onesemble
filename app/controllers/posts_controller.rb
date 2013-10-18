@@ -26,6 +26,8 @@ class PostsController < ApplicationController
   end
   
   def create
+    # params[:post][:start_date] = create_date(params[:start_date])
+    # params[:post][:end_date] = create_date(params[:end_date])
     @post = Post.create(params[:post])
     params[:genre_ids].each { |genre_id| @post.genres << Genre.find(genre_id)} if params[:genre_ids]
     params[:instrument_ids].each { |instrument_id| @post.instruments << Instrument.find(instrument_id)} if params[:instrument_ids]
@@ -50,6 +52,8 @@ class PostsController < ApplicationController
   end
   
   def update
+    # params[:post][:start_date] = create_date(params[:start_date])
+    # params[:post][:end_date] = create_date(params[:end_date])
     @post = Post.find(params[:id])
     @post.update_attributes(params[:post])
     @post.genres.destroy_all
@@ -127,5 +131,12 @@ class PostsController < ApplicationController
     ret = statement.values.compact.join(' and ')
     
     ret
+  end
+  
+  def create_date(date_hash)
+    hour = date_hash[:hour] || 0
+    minute = date_hash[:minute] || 0
+    
+    return DateTime.new(date_hash[:year].to_i, date_hash[:month].to_i, date_hash[:day].to_i, hour.to_i, minute.to_i)
   end
 end

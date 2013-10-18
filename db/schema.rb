@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131017141017) do
+ActiveRecord::Schema.define(:version => 20131018145454) do
 
   create_table "cities", :force => true do |t|
     t.integer "state_id"
@@ -66,13 +66,16 @@ ActiveRecord::Schema.define(:version => 20131017141017) do
     t.string   "subject"
     t.string   "body"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "type"
     t.decimal  "rate"
     t.boolean  "hourly"
     t.integer  "state_id"
     t.integer  "city_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "all_day",    :default => false
   end
 
   add_index "posts", ["city_id"], :name => "index_posts_on_city_id"

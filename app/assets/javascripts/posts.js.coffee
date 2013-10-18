@@ -25,8 +25,17 @@ $(document).on 'ajax:success', (xhr, data, status) ->
     $('#posts-container').append('<div> No posts match your search criteria. </div>')
 
 $(document).on 'ready', ->
+  if $('#all-day:checked').length 
+    $('#post_start_date_4i, #post_start_date_5i, #post_end_date_4i, #post_end_date_5i').attr('disabled', true)
+  
   $('.state-select').on 'change', (event) ->
     cities = $('.state-select option:selected').data('cities')
     $('.city-select').empty()
     for city in cities
       $('.city-select').append("<option value='#{city.id}'>#{city.name}</option>")
+      
+  $('#all-day').on 'change', (event) ->
+    if $('#all-day:checked').length
+      $('#post_start_date_4i, #post_start_date_5i, #post_end_date_4i, #post_end_date_5i').attr('disabled', true)
+    else
+      $('#post_start_date_4i, #post_start_date_5i, #post_end_date_4i, #post_end_date_5i').removeAttr('disabled')

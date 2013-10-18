@@ -93,6 +93,30 @@
 </div>
 
 <div>
+  <label>Time</label><br />
+  <% if post.start_date? %>
+    <% all_day = post.all_day == true %>
+    All Day: <input id="all-day" type="checkbox" name="post[all_day]" "<% if all_day %>" checked=checked "<% end %>"/>
+    <label>Start Time:
+      <%= datetime_select :post, :start_date, selected: post.start_date %>
+    </label>
+
+    <label>End Time:
+      <%= datetime_select :post, :end_date, selected: post.end_date %>
+    </label>
+  <% else %>
+    All Day: <input id="all-day" type="checkbox" name="post[all_day]" />
+    <label>Start Time:
+      <%= datetime_select :post, :start_date, start_year: 2013, prompt: { day: 'Select day', month: 'Select month', year: 'Select year', hour: 'Select hour', minute: 'Select minute' } %>
+    </label>
+
+    <label>End Time:
+      <%= datetime_select :post, :end_date, start_year: 2013, prompt: { day: 'Select day', month: 'Select month', year: 'Select year', hour: 'Select hour', minute: 'Select minute' } %>
+    </label>
+  <% end %>
+</div>
+
+<div>
   <label>Rate</label><br />
   <% if post.rate? %>
     <input type="text" data-required="true" name="post[rate]" value="<%= post.rate.to_i %>" />

@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
   has_many :specialties_posts, :dependent => :destroy
   has_many :specialties, :through => :specialties_posts
   
-  attr_accessible :subject, :body, :user_id, :state_id, :city_id, :rate, :hourly, :type
+  attr_accessible :subject, :body, :user_id, :state_id, :city_id, :rate, :hourly,
+                  :type, :start_date, :end_date, :all_day
   
 end
