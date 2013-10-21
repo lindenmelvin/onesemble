@@ -67,6 +67,8 @@
     <div>
 	
 		Any Time of Day: <input id="all-day" type="checkbox" name="all_day" />
+		<div><input type="radio" name="date_search" value="without" />Without</div>
+		<div><input type="radio" name="date_search" value="within" />Within</div>
     <label>Start Time:
       <%= datetime_select :post, :start_date, start_year: 2013, prompt: { day: 'Select day', month: 'Select month', year: 'Select year', hour: 'Select hour', minute: 'Select minute' } %>
     </label>

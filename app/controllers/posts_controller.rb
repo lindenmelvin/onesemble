@@ -109,7 +109,11 @@ class PostsController < ApplicationController
     statement = {}
 
     post_for_dates = Post.new(params[:post])
-    statement[:date] = "posts.start_date <= '#{post_for_dates.start_date}' and posts.end_date >= '#{post_for_dates.end_date}'"
+    if params[:date_search] == 'within'
+      statement[:date] = "posts.start_date >= '#{post_for_dates.start_date}' and posts.end_date <= '#{post_for_dates.end_date}'"
+    else
+      statement[:date] = "posts.start_date <= '#{post_for_dates.start_date}' and posts.end_date >= '#{post_for_dates.end_date}'"
+    end
     statement[:users] = "posts.user_id in (#{params[:users].join(',')})" if params[:users]
     statement[:instruments] = "instruments_posts.instrument_id in (#{params[:instruments].join(',')})" if params[:instruments]
     statement[:genres] = "genres_posts.genre_id in (#{params[:genres].join(',')})" if params[:genres]
