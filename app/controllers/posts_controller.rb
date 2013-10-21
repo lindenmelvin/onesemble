@@ -108,7 +108,8 @@ class PostsController < ApplicationController
   def create_sql_statement
     statement = {}
 
-    statement[:date] = construct_date_statement if params[:post][:'start_date(1i)'] != ''
+    post_for_dates = Post.new(params[:post])
+    statement[:date] = "posts.start_date <= '#{post_for_dates.start_date}' and posts.end_date >= '#{post_for_dates.end_date}'"
     statement[:users] = "posts.user_id in (#{params[:users].join(',')})" if params[:users]
     statement[:instruments] = "instruments_posts.instrument_id in (#{params[:instruments].join(',')})" if params[:instruments]
     statement[:genres] = "genres_posts.genre_id in (#{params[:genres].join(',')})" if params[:genres]
@@ -130,22 +131,6 @@ class PostsController < ApplicationController
     ret = statement.values.compact.join(' and ')
     
     ret
-  end
-  
-  def construct_date_statement
-    if params[:post][:'start_date(4i)']
-      start_date = DateTime.new(params[:post][:'start_date(1i)'].to_i, params[:post][:'start_date(2i)'].to_i, params[:post][:'start_date(3i)'].to_i, params[:post][:'start_date(4i)'].to_i, params[:post][:'start_date(5i)'].to_i)
-    else
-      start_date = DateTime.new(params[:post][:'start_date(1i)'].to_i, params[:post][:'start_date(2i)'].to_i, params[:post][:'start_date(3i)'].to_i)
-    end
-    
-    if params[:post][:'end_date(4i)']
-      end_date = DateTime.new(params[:post][:'end_date(1i)'].to_i, params[:post][:'end_date(2i)'].to_i, params[:post][:'end_date(3i)'].to_i, params[:post][:'end_date(4i)'].to_i, params[:post][:'end_date(5i)'].to_i)
-    else
-      end_date = DateTime.new(params[:post][:'end_date(1i)'].to_i, params[:post][:'end_date(2i)'].to_i, params[:post][:'end_date(3i)'].to_i)
-    end
-
-    return "posts.start_date <= '#{start_date}' and posts.end_date >= '#{end_date}'"
   end
   
 end
