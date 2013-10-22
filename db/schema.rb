@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131018145454) do
+ActiveRecord::Schema.define(:version => 20131022140703) do
 
   create_table "cities", :force => true do |t|
     t.integer "state_id"
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(:version => 20131018145454) do
     t.integer  "user_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.integer  "state_id"
-    t.integer  "city_id"
     t.string   "type"
     t.decimal  "rate"
     t.boolean  "hourly"
+    t.integer  "state_id"
+    t.integer  "city_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean  "all_day",    :default => false
@@ -150,6 +150,10 @@ ActiveRecord::Schema.define(:version => 20131018145454) do
     t.decimal  "reputation"
     t.integer  "state_id"
     t.integer  "city_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -4,6 +4,8 @@
   <h1><%= @user.email %>'s Profile</h1>
 <% end %>
 
+<%= image_tag @user.avatar.url %>
+
 <div>Rating: <%= @rating %></div>
 
 <div>First Name: <%= @user.first_name %></div>
