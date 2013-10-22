@@ -8,6 +8,7 @@ gem 'omniauth'
 gem 'rails_12factor'
 gem 'ancestry'
 gem 'paperclip'
+gem 'aws-sdk'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
