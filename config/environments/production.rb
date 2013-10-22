@@ -66,12 +66,13 @@ Onesemble::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => ENV['onesemble'],
-      :access_key_id => ENV['AKIAJTTNVLUOUFW72MLA'],
-      :secret_access_key => ENV['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']
+      :bucket => ENV['S3_BUCKET_NAME'],
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
 end
