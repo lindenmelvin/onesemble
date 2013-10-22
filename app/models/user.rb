@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => ":style/default_avatar.png"
+  attr_accessor :avatar_file_name
   has_many :posts
   has_many :ratings
   has_many :recommendations
