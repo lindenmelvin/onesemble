@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
         square: '200x200#',
         medium: '300x300>'
     },
+    :default_url => 'missing.png',
     :s3_protocol => 'https',
     :bucket => 'onesemble',
     :s3_credentials => "#{Rails.root}/config/s3.yml",
