@@ -1,17 +1,12 @@
 class User < ActiveRecord::Base
   
   has_attached_file :avatar,
-    :styles => {
-      :thumbnail => '100x101>',
-      :regular => '560x568>'
-    },
+    :bucket => 'onesemble',
+    :s3_permissions => :private,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
     :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['AWS_BUCKET'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-    },
-    :path => ":filename.:extension"
+    :path => ":class/:id_partition/:style/:filename",
+    :url => ":class/system/:hash.:extension"
 
   attr_accessor :avatar_file_name
   has_many :posts
