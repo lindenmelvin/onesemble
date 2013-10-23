@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
     :path => "/:class/:attachment/:id_partition/:style/:filename",
     :url => ":s3_domain_url"
 
-  attr_accessor :avatar_file_name
   has_many :posts
   has_many :ratings
   has_many :recommendations
