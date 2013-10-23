@@ -9,6 +9,7 @@ gem 'rails_12factor'
 gem 'ancestry'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'aws-s3'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
