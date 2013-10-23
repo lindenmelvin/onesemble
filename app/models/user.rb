@@ -1,12 +1,17 @@
 class User < ActiveRecord::Base
   
   has_attached_file :avatar,
+    styles: {
+        thumb: '100x100>',
+        square: '200x200#',
+        medium: '300x300>'
+    },
+    :s3_protocol => 'https',
     :bucket => 'onesemble',
-    :s3_permissions => :private,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :storage => :s3,
-    :path => ":class/:id_partition/:style/:filename",
-    :url => ":class/system/:hash.:extension"
+    :path => "/:class/:attachment/:id_partition/:style/:filename",
+    :url => ":s3_domain_url"
 
   attr_accessor :avatar_file_name
   has_many :posts
