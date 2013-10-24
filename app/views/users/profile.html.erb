@@ -4,6 +4,8 @@
   <h1><%= current_user.email %>'s Profile</h1>
 <% end %>
 
+<%= image_tag current_user.avatar.url %>
+
 <div>Rating: <%= @rating %></div>
 
 <div>First Name: <%= current_user.first_name %></div>
@@ -11,6 +13,10 @@
 <div>Email: <%= current_user.email %></div>
 <div>State: <%= current_user.state.name rescue 'N/A' %></div>
 <div>City: <%= current_user.city.name rescue 'N/A' %></div>
+
+<div>About Me: <br /><%= current_user.about_me %></div>
+<div>Experience: <br /><%= current_user.experience %></div>
+<div>Education: <br /><%= current_user.education %></div>
 
 <h1>Open Contracts</h1>
 <% @open_contracts.each do |contract| %>

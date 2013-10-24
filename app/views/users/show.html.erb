@@ -14,6 +14,10 @@
 <div>State: <%= @user.state.name rescue 'N/A' %></div>
 <div>City: <%= @user.city.name rescue 'N/A' %></div>
 
+<div>About Me: <br /><%= @user.about_me %></div>
+<div>Experience: <br /><%= @user.experience %></div>
+<div>Education: <br /><%= @user.education %></div>
+
 <% unless @user.id == current_user.id %>
   <%= form_for Request.new do |f| %>
     <%= f.hidden_field :sender_id, value: current_user.id %>

@@ -25,5 +25,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :state_id, :city_id, :avatar
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation,
+                  :remember_me, :state_id, :city_id, :avatar, :about_me, :experience, :education
 end
